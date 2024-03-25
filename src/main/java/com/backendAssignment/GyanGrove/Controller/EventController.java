@@ -74,13 +74,13 @@ public class EventController {
             String currentDateString = currentDate.format(formatter);
 
             // getting city name by date from database
-            String cityNameByDate = weatherService.getCityNameByDate(currentDateString);
+            String cityName = weatherService.getCityNameByDate(currentDateString);
 
             // getting event name by date from database
-            String eventNameByDate = weatherService.getEventName(currentDateString);
+            String eventName = weatherService.getEventName(currentDateString);
 
             // getting weather details this is coming from external api that is given in the assignment
-            String weatherApiResponse = weatherService.getWeather(cityNameByDate, currentDateString);
+            String weatherApiResponse = weatherService.getWeather(cityName, currentDateString);
             String weather = extractWeatherFromApiResponse(weatherApiResponse);
 
             // Calculate distance using user's source latitude and longitude this is coming from external api that is given in the assignment
@@ -89,8 +89,8 @@ public class EventController {
 
             // creating event data and returning
             EventDTO eventData = new EventDTO();
-            eventData.setEvent_Name(eventNameByDate);
-            eventData.setCity_Name(cityNameByDate);
+            eventData.setEvent_Name(eventName);
+            eventData.setCity_Name(cityName);
             eventData.setDate(currentDateString);
             eventData.setWeather(weather);
             eventData.setDistance(distance);
@@ -104,8 +104,8 @@ public class EventController {
     //logic for extracting data from external distance api basically extracting data value from json
     private Double extractDistanceFromApiResponse(String distanceApiResponse) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(distanceApiResponse);
+            ObjectMapper map = new ObjectMapper();
+            JsonNode rootNode = map.readTree(distanceApiResponse);
             String distanceString = rootNode.get("distance").asText();
             return Double.parseDouble(distanceString);
 
@@ -119,8 +119,8 @@ public class EventController {
     //logic for extracting data from external weather api basically extracting data value from json
     private String extractWeatherFromApiResponse(String weatherApiResponse) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(weatherApiResponse);
+            ObjectMapper map = new ObjectMapper();
+            JsonNode rootNode = map.readTree(weatherApiResponse);
             String weather = rootNode.get("weather").asText();
             return weather;
         } catch (IOException | NullPointerException e) {
