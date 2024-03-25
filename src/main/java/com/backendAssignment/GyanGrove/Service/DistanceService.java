@@ -10,33 +10,14 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DistanceService {
 
-    @Value("${distance.api.url}")
-    private String distanceApiUrl;
+    public String calculateDistance(double latitude, double longitude) {
+        String apiUrl = "https://gg-backend-assignment.azurewebsites.net/api/Distance?code=IAKvV2EvJa6Z6dEIUqqd7yGAu7IZ8gaH-a0QO6btjRc1AzFu8Y3IcQ=="
+                + "&latitude1=40.7128"
+                + "&longitude1=-74.0060"
+                + "&latitude2=" + latitude
+                + "&longitude2=" + longitude;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    public Double calculateDistance(double latitude1, double longitude1, double latitude2, double longitude2) {
-        String apiUrl = distanceApiUrl + "?latitude1=" + latitude1 + "&longitude1=" + longitude1 +
-                "&latitude2=" + latitude2 + "&longitude2=" + longitude2;
-        ResponseEntity<Double> response = restTemplate.getForEntity(apiUrl, Double.class);
-
-        HttpStatus statusCode = (HttpStatus) response.getStatusCode();
-
-        if (statusCode.is2xxSuccessful()) {
-            return response.getBody();
-        } else if (statusCode.is4xxClientError()) {
-            // Handle client errors (e.g., 404 Not Found)
-            System.out.println("API client error: " + statusCode);
-            return null;
-        } else if (statusCode.is5xxServerError()) {
-            // Handle server errors (e.g., 500 Internal Server Error)
-            System.out.println("API server error: " + statusCode);
-            return null;
-        } else {
-            // Handle other status codes
-            System.out.println("Unexpected API response: " + statusCode);
-            return null;
-        }
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(apiUrl, String.class);
     }
 }
