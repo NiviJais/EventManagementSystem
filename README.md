@@ -1,9 +1,9 @@
-# EventManagementSystem
+![Screenshot 2024-03-26 234157](https://github.com/NiviJais/EventManagementSystem/assets/144360099/4c636b7b-f91b-4483-aa67-88b13bf8811b)# EventManagementSystem
 
 Created RESTful service that manages event data based on a user's geographical location and a specified date.
 
-Utilized Swagger UI for clear Repersentation And Documentation of Restful APIs
-C:\Users\91738\OneDrive\Pictures\Screenshots\Screenshot 2024-03-26 234157.png
+![Utilized Swagger UI for clear Repersentation And Documentation of Restful APIs](https://github.com/NiviJais/EventManagementSystem/blob/main//image.png)
+
 
 Technology Stack:
 
