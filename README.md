@@ -2,6 +2,9 @@
 
 Created RESTful service that manages event data based on a user's geographical location and a specified date.
 
+Utilized Swagger UI for clear Repersentation And Documentation of Restful APIs
+C:\Users\91738\OneDrive\Pictures\Screenshots\Screenshot 2024-03-26 234157.png
+
 Technology Stack:
 
 Java SpringBoot :
